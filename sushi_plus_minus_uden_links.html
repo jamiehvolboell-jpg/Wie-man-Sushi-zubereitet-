@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sushi zuhause – einfache Schritt-für-Schritt-Anleitung und Einkaufsliste.">
+<title>Sushi zuhause – Japanische Küche</title>
+<style>
+:root{--ink:#17201d;--muted:#66706c;--paper:#fffaf4;--card:#fff;--accent:#d85d4f;--gold:#f3c76b;--line:#eadfd3}
+*{box-sizing:border-box;scroll-behavior:smooth}body{margin:0;font-family:Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+header{position:sticky;top:0;z-index:5;background:#17201df5;color:white}.nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{color:white;text-decoration:none;font-weight:800;font-size:1.1rem}.logo span{color:var(--gold)}nav{display:flex;gap:22px}nav a{color:white;text-decoration:none;font-weight:700}nav a:hover{color:var(--gold)}
+main{max-width:1150px;margin:auto;padding:0 20px}.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:65px 0}
+.kicker,.small,.number{color:var(--accent);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem}
+h1{font-size:clamp(2.8rem,6vw,5.4rem);line-height:.98;letter-spacing:-.05em;margin:12px 0 20px}h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1.05;margin:8px 0 12px}
+.hero p,.muted{color:var(--muted)}.hero p{font-size:1.15rem}.hero-img{width:100%;height:440px;object-fit:cover;border-radius:28px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.btn{padding:12px 19px;border-radius:999px;text-decoration:none;font-weight:800;border:1px solid var(--ink)}.primary{background:var(--ink);color:white}.secondary{background:white}
+.meta{display:flex;gap:10px;flex-wrap:wrap}.pill{background:white;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-weight:700}
+section{padding:60px 0;border-top:1px solid var(--line)}.section-head{max-width:700px;margin-bottom:28px}
+.steps,.types{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:22px;padding:25px}
+.shopping-top{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}.counter{background:#f5eadc;padding:9px 14px;border-radius:999px;font-weight:800}
+.ingredients{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:25px}.ingredient{display:flex;align-items:center;gap:12px;background:white;border:1px solid var(--line);border-radius:16px;padding:12px}.ingredient input{width:20px;height:20px;accent-color:var(--accent)}.ingredient a:first-of-type{flex:1;font-weight:800;text-decoration:none}.ingredient a:first-of-type:hover{color:var(--accent)}.cart{width:40px;height:40px;border-radius:50%;background:var(--ink);color:white;text-decoration:none;display:grid;place-items:center}.cart:hover{background:var(--accent)}
+.type-card{padding:0;overflow:hidden}.type-card img{width:100%;height:210px;object-fit:cover}.type-body{padding:20px}footer{text-align:center;padding:40px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:800px){.hero,.steps,.types{grid-template-columns:1fr}.hero-img{height:320px}.ingredients{grid-template-columns:1fr}nav{gap:12px}nav a{font-size:.85rem}}
+
+.sushi-choice{cursor:pointer;transition:transform .2s,box-shadow .2s}.sushi-choice:hover,.sushi-choice:focus{transform:translateY(-5px);box-shadow:0 18px 35px rgba(50,35,20,.12);outline:none}.type-body strong{color:var(--accent);display:inline-block;margin-top:8px}
+.recipe-modal{display:none;position:fixed;inset:0;background:rgba(15,20,18,.72);z-index:100;padding:20px;overflow:auto}.recipe-modal.open{display:grid;place-items:center}.recipe-box{position:relative;background:var(--paper);width:min(900px,100%);max-height:90vh;overflow:auto;border-radius:28px;padding:35px;box-shadow:0 30px 80px rgba(0,0,0,.3)}.close-recipe{position:absolute;right:18px;top:14px;border:0;background:var(--ink);color:white;width:42px;height:42px;border-radius:50%;font-size:28px;cursor:pointer}.recipe-box h2{margin-top:0}.recipe-hero{width:100%;height:260px;object-fit:cover;border-radius:20px;margin-bottom:22px}.recipe-steps{display:grid;gap:12px}.recipe-step{background:white;border:1px solid var(--line);border-radius:15px;padding:15px}.recipe-step b{color:var(--accent)}@media(max-width:600px){.recipe-box{padding:24px 18px}.recipe-hero{height:190px}}
+.amount{display:inline-block;color:var(--accent);font-weight:900;white-space:nowrap;margin-right:4px}.recipe-ingredients{display:grid;gap:8px;margin:18px 0 24px;padding:0;list-style:none}.recipe-ingredients li{background:white;border:1px solid var(--line);border-radius:12px;padding:10px 13px}.recipe-title{margin-top:0}
+/* Portionssteuerung */
+.portion-control{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:18px auto 10px;
+  font-weight:700;
+  font-size:1.05rem;
+}
+.portion-control button{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:10px;
+  background:#ff6b6b;
+  color:white;
+  font-size:1.4rem;
+  line-height:1;
+  cursor:pointer;
+}
+.portion-control button:hover{opacity:.88}
+#portionen{
+  min-width:28px;
+  text-align:center;
+}
+.amount{
+  font-weight:700;
+  margin-left:6px;
+}
+
+</style>
+<style>
+/* SICHERE PORTIONSSTEUERUNG */
+.portion-control{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:18px auto;
+  font-weight:700;
+  font-size:1.05rem;
+}
+.portion-control button{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:10px;
+  background:#ff6b6b;
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+.portion-control button:hover{opacity:.85}
+#portionen{min-width:30px;text-align:center}
+.amount{font-weight:700;margin-right:8px}
+</style>
+
+</head>
+<body>
+<header><div class="nav">鮨 <span>Sushi zuhause</span><nav>AnleitungEinkaufslisteSushi-Arten</nav></div></header>
+<main id="top">
+<section class="hero"><div><div class="kicker">Japanische Küche · Für Anfänger</div><h1>Rolle dein eigenes Sushi.</h1><p>Alles, was du für eine schöne Sushi-Platte brauchst. Einfach erklärt, entspannt zubereitet und am Ende gemeinsam gegessen.</p><div class="buttons">Zur Anleitung →Zutaten ansehen</div><div class="meta"><span class="pill">⏱ 45 Minuten</span><span class="pill">👥 2–3 Portionen</span><span class="pill">★ Einfach</span></div></div><img class="hero-img" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=85" alt="Frisch angerichtetes Sushi"></section>
+<section id="anleitung"><div class="section-head"><div class="small">Schritt für Schritt</div><h2>Der einfache Weg.</h2><p class="muted">Kein Profi-Equipment, kein Stress. Bereite die einzelnen Bausteine vor und lass dir beim Rollen Zeit.</p></div><div class="steps"><article class="card"><div class="number">01 / VORBEREITEN</div><h3>Reis kochen</h3><p>Reis gründlich waschen, garen und noch warm mit Reisessig, Zucker und Salz abschmecken.</p></article><article class="card"><div class="number">02 / FÜLLEN</div><h3>Zutaten schneiden</h3><p>Gurke, Avocado und Lachs oder Tofu in gleichmäßige Streifen schneiden.</p></article><article class="card"><div class="number">03 / ROLLEN</div><h3>Form geben</h3><p>Nori, Reis und Füllung auf die Matte legen, fest einrollen und mit einem feuchten Messer teilen.</p></article></div></section>
+
+<div id="portion-control" class="portion-control">
+  <label for="portionen">👥 Portionen:</label>
+  <button type="button" id="minusPortion">−</button>
+  <span id="portionen">2</span>
+  <button type="button" id="plusPortion">+</button>
+  <span id="stückzahl" style="margin-left:10px;color:var(--accent);font-weight:800;">🍣 ca. 24–32 Stück</span>
+</div>
+
+<section id="einkaufsliste"><div class="shopping-top"><div class="section-head"><div class="small">Einkaufsliste</div><h2>Weniger suchen. Mehr rollen.</h2><p class="muted">Hake ab, was schon in deiner Küche wartet. Klick auf den Namen oder 🛒 für Nemlig.</p></div><div class="counter" id="counter">0 / 10 erledigt</div></div><div class="ingredients"><label class="ingredient"><input type="checkbox"><span class="amount">300 g</span> Sushi-Reis🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">4 Blätter</span> Nori-Algen🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">200 g</span> Lachs oder Tofu🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">1 Stück</span> Gurke🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">1 Stück</span> Avocado🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">100 g</span> Frischkäse🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">4 EL</span> Reisessig🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">2 EL Zucker + 1 TL Salz</span> Zucker & Salz🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">ca. 100 ml</span> Sojasauce🛒</label>
+<label class="ingredient"><input type="checkbox"><span class="amount">ca. 1 EL</span> Wasabi🛒</label></div></section>
+<section id="sushi-arten"><div class="section-head"><div class="small">Sushi-Arten</div><h2>Was darf es sein?</h2><p class="muted">Klicke auf eine Sushi-Art und lerne Schritt für Schritt, wie du sie selbst machst.</p></div>
+<div class="types">
+<article class="card type-card sushi-choice" data-sushi="maki" tabindex="0"><img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=900&q=85" alt="Maki Sushi"><div class="type-body"><h3>Maki</h3><p>Die klassische Rolle mit Nori außen und Füllung in der Mitte.</p><strong>Rezept öffnen →</strong></div></article>
+<article class="card type-card sushi-choice" data-sushi="uramaki" tabindex="0"><img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=900&q=85" alt="Uramaki Sushi"><div class="type-body"><h3>Uramaki</h3><p>Inside-out Sushi: Reis außen und Nori innen.</p><strong>Rezept öffnen →</strong></div></article>
+<article class="card type-card sushi-choice" data-sushi="nigiri" tabindex="0"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=900&q=85" alt="Nigiri Sushi"><div class="type-body"><h3>Nigiri</h3><p>Handgeformter Sushi-Reis mit einem Topping obenauf.</p><strong>Rezept öffnen →</strong></div></article>
+</div></section>
+
+<div class="recipe-modal" id="recipeModal" aria-hidden="true">
+<div class="recipe-box">
+<button class="close-recipe" id="closeRecipe" aria-label="Schließen">×</button>
+<div id="recipeContent"></div>
+</div></div>
+</main><footer>Sushi zuhause · Guten Appetit · いただきます</footer>
+<script>
+const boxes=[...document.querySelectorAll('.ingredient input')],counter=document.getElementById('counter');
+try{JSON.parse(localStorage.getItem('sushi-checks')||'[]').forEach((v,i)=>boxes[i].checked=v)}catch(e){}
+function update(){let n=boxes.filter(x=>x.checked).length;counter.textContent=`${n} / ${boxes.length} erledigt`;localStorage.setItem('sushi-checks',JSON.stringify(boxes.map(x=>x.checked)))}
+boxes.forEach(x=>x.addEventListener('change',update));update();
+</script>
+<script>
+const recipes = {
+  maki: {
+    title:"Maki – Schritt für Schritt",
+    image:"https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=1200&q=85",
+    intro:"Für ca. 2–3 Personen / etwa 24–32 Stück.",
+    ingredients:["300 g Sushireis","4 Nori-Blätter","200 g Lachs oder Tofu","1/2 Gurke","1 Avocado","4 EL Reisessig","2 EL Zucker","1 TL Salz"],
+    steps:[
+      "Sushi-Reis vorbereiten und abkühlen lassen.",
+      "Eine halbe Nori-Platte mit der glänzenden Seite nach unten auf die Bambusmatte legen.",
+      "Mit feuchten Händen eine dünne Schicht Reis auf dem Nori verteilen und oben einen kleinen Rand frei lassen.",
+      "Füllung, zum Beispiel Gurke, Avocado oder Lachs, in einer Linie in die Mitte legen.",
+      "Mit der Matte von unten nach vorne rollen und die Rolle dabei leicht festdrücken.",
+      "Die Rolle mit einem scharfen, leicht feuchten Messer in 6–8 Stücke schneiden."
+    ]
+  },
+  uramaki: {
+    title:"Uramaki – Schritt für Schritt",
+    image:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=1200&q=85",
+    intro:"Für ca. 2–3 Personen / etwa 24–32 Stück.",
+    ingredients:["300 g Sushireis","4 Nori-Blätter","200 g Lachs oder Tofu","1/2 Avocado","1/2 Gurke","2 EL Sesam","4 EL Reisessig","2 EL Zucker","1 TL Salz"],
+    steps:[
+      "Sushi-Reis vorbereiten und abkühlen lassen.",
+      "Nori auf die Bambusmatte legen und eine gleichmäßige Schicht Reis darauf verteilen.",
+      "Die Reisseite vorsichtig nach unten drehen. Frischhaltefolie auf der Matte kann das Kleben reduzieren.",
+      "Nori mit Füllung wie Avocado, Gurke oder Lachs belegen.",
+      "Mit der Bambusmatte eng aufrollen und die Rolle vorsichtig zusammendrücken.",
+      "Frischhaltefolie entfernen und die Rolle mit einem feuchten, scharfen Messer in gleichmäßige Stücke schneiden."
+    ]
+  },
+  nigiri: {
+    title:"Nigiri – Schritt für Schritt",
+    image:"https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=1200&q=85",
+    intro:"Für ca. 2–3 Personen / etwa 18 Nigiri.",
+    ingredients:["350 g gekochter Sushireis","200–250 g Lachs oder Fisch in Sushi-Qualität","1 EL Wasabi","ca. 100 ml Sojasauce zum Servieren"],
+    steps:[
+      "Sushi-Reis vorbereiten und vollständig abkühlen lassen.",
+      "Hände leicht mit Wasser befeuchten, damit der Reis nicht an den Fingern klebt.",
+      "Eine kleine Portion Reis nehmen und locker zu einer länglichen, ovalen Form drücken.",
+      "Optional eine sehr kleine Menge Wasabi auf die Oberseite des Reisstücks geben.",
+      "Eine passende Scheibe Fisch oder ein Gemüse-Topping darauflegen.",
+      "Das Topping sanft andrücken und Nigiri direkt mit Sojasauce, Wasabi und eingelegtem Ingwer servieren."
+    ]
+  }
+};
+
+const recipeShopping = {
+  maki: [
+    {value:300, unit:"g", name:"Sushi-Reis"},
+    {value:4, unit:"Blätter", name:"Nori-Algen"},
+    {value:200, unit:"g", name:"Lachs oder Tofu"},
+    {value:0.5, unit:"Stück", name:"Gurke"},
+    {value:1, unit:"Stück", name:"Avocado"},
+    {value:4, unit:"EL", name:"Reisessig"},
+    {value:2, unit:"EL", name:"Zucker"},
+    {value:1, unit:"TL", name:"Salz"}
+  ],
+  uramaki: [
+    {value:300, unit:"g", name:"Sushi-Reis"},
+    {value:4, unit:"Blätter", name:"Nori-Algen"},
+    {value:200, unit:"g", name:"Lachs oder Tofu"},
+    {value:0.5, unit:"Stück", name:"Avocado"},
+    {value:0.5, unit:"Stück", name:"Gurke"},
+    {value:2, unit:"EL", name:"Sesam"},
+    {value:4, unit:"EL", name:"Reisessig"},
+    {value:2, unit:"EL", name:"Zucker"},
+    {value:1, unit:"TL", name:"Salz"}
+  ],
+  nigiri: [
+    {value:350, unit:"g", name:"Gekochter Sushi-Reis"},
+    {value:225, unit:"g", name:"Lachs oder Fisch in Sushi-Qualität"},
+    {value:1, unit:"EL", name:"Wasabi"},
+    {value:100, unit:"ml", name:"Sojasauce"}
+  ]
+};
+
+const recipePieces = {
+  maki:[24,32],
+  uramaki:[24,32],
+  nigiri:[18,18]
+};
+
+const recipePortions = {
+  maki:2,
+  uramaki:2,
+  nigiri:2
+};
+
+const modal=document.getElementById("recipeModal");
+const content=document.getElementById("recipeContent");
+
+function numberRecipe(n){
+  return Number.isInteger(n) ? String(n) : n.toFixed(1).replace(".",",");
+}
+
+function renderRecipeShopping(key){
+  const list=recipeShopping[key];
+  const portions=recipePortions[key];
+
+  return `
+    <div class="portion-control" style="margin:20px 0;">
+      <label>👥 Portionen:</label>
+      <button type="button" class="recipe-minus">−</button>
+      <span class="recipe-portions">${portions}</span>
+      <button type="button" class="recipe-plus">+</button>
+      <span class="recipe-piece-count" style="color:var(--accent);font-weight:800;">
+        🍣 ca. ${recipePieces[key][0]*portions/2}–${recipePieces[key][1]*portions/2} Stück
+      </span>
+    </div>
+
+    <h3>🛒 Einkaufsliste</h3>
+    <p class="muted">Du kannst direkt auf eine Zutat klicken, um sie bei Nemlig zu suchen.</p>
+    <ul class="recipe-ingredients shopping-recipe-list">
+      ${list.map(x=>{
+        const amount=x.value*portions/2;
+        return `<li>
+          
+            <span><span class="amount">${numberRecipe(amount)} ${x.unit}</span> ${x.name}</span>
+            <span class="cart" style="flex:0 0 auto;">🛒</span>
+          
+        </li>`;
+      }).join("")}
+    </ul>`;
+}
+
+function updateRecipeShopping(key){
+  const portions=recipePortions[key];
+  const list=recipeShopping[key];
+  const box=content.querySelector(".shopping-recipe-list");
+
+  if(box){
+    box.innerHTML=list.map(x=>{
+      const amount=x.value*portions/2;
+      return `<li>
+        
+          <span><span class="amount">${numberRecipe(amount)} ${x.unit}</span> ${x.name}</span>
+          <span class="cart" style="flex:0 0 auto;">🛒</span>
+        
+      </li>`;
+    }).join("");
+  }
+
+  const p=content.querySelector(".recipe-portions");
+  if(p) p.textContent=portions;
+
+  const pieces=content.querySelector(".recipe-piece-count");
+  if(pieces){
+    pieces.textContent=`🍣 ca. ${recipePieces[key][0]*portions/2}–${recipePieces[key][1]*portions/2} Stück`;
+  }
+}
+
+function openRecipe(key){
+  const r=recipes[key];
+
+  content.innerHTML=`
+    <img class="recipe-hero" src="${r.image}" alt="${r.title}">
+    <div class="small">Anleitung</div>
+    <h2 class="recipe-title">${r.title}</h2>
+    <p class="muted">${r.intro}</p>
+    ${renderRecipeShopping(key)}
+    <h3>👨‍🍳 Zubereitung</h3>
+    <div class="recipe-steps">
+      ${r.steps.map((s,i)=>`<div class="recipe-step"><b>Schritt ${i+1}</b><br>${s}</div>`).join("")}
+    </div>`;
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+
+  content.querySelector(".recipe-plus").onclick=()=>{
+    if(recipePortions[key]<20){
+      recipePortions[key]++;
+      updateRecipeShopping(key);
+    }
+  };
+
+  content.querySelector(".recipe-minus").onclick=()=>{
+    if(recipePortions[key]>1){
+      recipePortions[key]--;
+      updateRecipeShopping(key);
+    }
+  };
+}
+
+function closeRecipe(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+
+document.querySelectorAll(".sushi-choice").forEach(card=>{
+  card.addEventListener("click",()=>openRecipe(card.dataset.sushi));
+  card.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){
+      e.preventDefault();
+      openRecipe(card.dataset.sushi);
+    }
+  });
+});
+
+document.getElementById("closeRecipe").onclick=closeRecipe;
+modal.addEventListener("click",e=>{if(e.target===modal)closeRecipe()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeRecipe()});
+</script>
+
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  let portions=2;
+
+  const base=[
+    {value:300,unit:"g"},
+    {value:4,unit:"Blätter"},
+    {value:200,unit:"g"},
+    {value:1,unit:"Stück"},
+    {value:1,unit:"Stück"},
+    {value:100,unit:"g"},
+    {value:4,unit:"EL"},
+    {value:null,unit:""},
+    {value:100,unit:"ml"},
+    {value:1,unit:"EL"}
+  ];
+
+  function number(n){
+    return Number.isInteger(n)?String(n):n.toFixed(1).replace(".",",");
+  }
+
+  function updateShopping(){
+    document.querySelectorAll("#einkaufsliste .ingredient").forEach((item,index)=>{
+      const b=base[index];
+      const amount=item.querySelector(".amount");
+      if(!b||!amount)return;
+
+      if(index===7){
+        amount.textContent=number(2*portions/2)+" EL Zucker + "+number(1*portions/2)+" TL Salz";
+      }else{
+        amount.textContent=number(b.value*portions/2)+" "+b.unit;
+      }
+    });
+  }
+
+  function updateAll(){
+    document.getElementById("portionen").textContent=portions;
+    updateShopping();
+
+    const pieceText=document.getElementById("stückzahl");
+    if(pieceText){
+      pieceText.textContent="🍣 ca. "+(12*portions)+"–"+(16*portions)+" Stück";
+    }
+  }
+
+  document.getElementById("plusPortion").onclick=function(){
+    if(portions<20){portions++;updateAll();}
+  };
+
+  document.getElementById("minusPortion").onclick=function(){
+    if(portions>1){portions--;updateAll();}
+  };
+
+  updateAll();
+});
+</script>
+
+</body></html>
